@@ -26,7 +26,7 @@ public class MainAppTests {
 		this.client.get().uri("/person/1")
 				.exchange()
 				.expectStatus().isOk()
-				.expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+				.expectHeader().contentType(MediaType.APPLICATION_JSON)
 				.expectBody(Person.class).isEqualTo(new Person(1L, "Amanda"));
 	}
 

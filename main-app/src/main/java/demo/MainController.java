@@ -6,6 +6,7 @@ import java.util.Map;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +25,10 @@ public class MainController {
 	private AccountRepository accountRepository;
 
 
-	public MainController(WebClient.Builder builder, AccountRepository repository) {
-		this.client = builder.baseUrl("http://localhost:8081").build();
+	public MainController(WebClient.Builder builder,
+                          AccountRepository repository,
+                          @Value(value = "${remote-services.base-url}") String baseUrl) {
+		this.client = builder.baseUrl(baseUrl).build();
 		this.accountRepository = repository;
 	}
 
